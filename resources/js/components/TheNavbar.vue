@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light position-sticky top-0" id="mainNav">
     <div class="container px-4 px-lg-5">
 
       <a class="navbar-brand" href="index.html">Laravel Boolpress</a>
@@ -40,3 +40,11 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+  #mainNav{
+    z-index: 10;
+    background-color: rgba(255,255,255, .7);
+    backdrop-filter: blur(5px);
+  }
+</style>

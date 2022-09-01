@@ -13,9 +13,7 @@
             </a>
             <p class="post-meta">
               Postato da
-              <router-link :to="{ name:'user.posts', params: { 'user_id': post.user.id } }">
-                {{ post.user.name }}
-              </router-link>
+              <a href="#!">{{ post.user.name }}</a>
               il <em>{{ new Intl.DateTimeFormat("it-IT", { dateStyle: "long", timeStyle: "short" }).format(new
                   Date(post.created_at))
               }}</em>
@@ -25,6 +23,9 @@
           <!-- Divider-->
           <hr class="my-4">
         </div>
+
+        <div v-if="posts.length === 0">
+          Nessun dato disponibile...</div>
       </div>
     </div>
 
@@ -42,15 +43,30 @@ export default {
   data() {
     return {
       posts: [],
-      paginationData: {}
+      paginationData: {},
+      user: {}
     }
   },
   methods: {
     fetchData(page = 1) {
-      axios.get("/api/posts?page=" + page)
+      axios.get("/api/posts", {
+        params: {
+          page: page,
+          user_id: this.$route.params.user_id
+        }
+      })
         .then((resp) => {
           this.posts.push(...resp.data.data)
           this.paginationData = resp.data
+        })
+    },
+    fetchUserData() {
+      axios.get("/api/users/" + this.$route.params.user_id)
+        .then((resp) => {
+          this.user = resp.data
+
+          this.$route.meta.title = "Post scritti da " + this.user.name
+          this.$router.replace({ query: { temp: Date.now() } })
         })
     },
     loadMoreData() {
@@ -58,16 +74,10 @@ export default {
 
       this.fetchData(currentPage + 1)
     },
-    /**
-     * 
-     * @param {string} text 
-     * @param {number} limit 
-     */
-    truncateText(text, limit = 100) {
-      return text.substring(0, limit) + "..."
-    }
+
   },
   mounted() {
+    this.fetchUserData();
     this.fetchData();
   }
 }
