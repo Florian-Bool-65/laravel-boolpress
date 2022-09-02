@@ -22,10 +22,11 @@
         <div v-for="post in posts" :key="post.id">
           <!-- Post preview-->
           <div class="post-preview">
-            <a href="post.html">
+            {{post.slug}}
+            <router-link :to="{ name: 'posts.show', params: { post_slug: post.slug } }">
               <h2 class="post-title">{{ post.title }}</h2>
               <h3 class="post-subtitle">{{ post.content }}</h3>
-            </a>
+            </router-link>
             <p class="post-meta">
               Postato da
               <router-link :to="{ name: 'user.posts', params: { 'user_id': post.user.id } }">
