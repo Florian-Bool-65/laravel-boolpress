@@ -29,6 +29,11 @@
           <li class="nav-item">
             <router-link class="nav-link px-lg-3 py-3 py-lg-4" :to="{ name: 'contact.index' }">Contact</router-link>
           </li>
+
+          <li class="nav-item">
+            <a v-if="user" href="/admin" class="nav-link px-lg-3 py-3 py-lg-4">{{user.name}}</a>
+            <a v-else href="/login" class="nav-link px-lg-3 py-3 py-lg-4">Login</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -36,15 +41,27 @@
 </template>
 
 <script>
-export default {
+import Axios from 'axios';
 
+export default {
+  data() {
+    return {
+      user: null
+    }
+  },
+  mounted() {
+    Axios.get("/api/user")
+      .then(resp => {
+        this.user = resp.data
+      })
+  }
 }
 </script>
 
 <style lang="scss">
-  #mainNav{
-    z-index: 10;
-    background-color: rgba(255,255,255, .7);
-    backdrop-filter: blur(5px);
-  }
+#mainNav {
+  z-index: 10;
+  background-color: rgba(255, 255, 255, .7);
+  backdrop-filter: blur(5px);
+}
 </style>

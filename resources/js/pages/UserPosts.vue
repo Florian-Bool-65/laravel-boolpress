@@ -50,6 +50,7 @@ export default {
   methods: {
     fetchData(page = 1) {
       axios.get("/api/posts", {
+        // in axios params = query string
         params: {
           page: page,
           user_id: this.$route.params.user_id
