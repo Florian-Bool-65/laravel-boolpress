@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth')->get('/user', function (Request $request) {
     return $request->user();
 });
 
@@ -22,3 +22,5 @@ Route::get("/users/{user}", "Api\UserController@show");
 
 Route::get("/posts", "Api\PostController@index");
 Route::get("/posts/{post}", "Api\PostController@show");
+
+Route::post("/contacts", "Api\ContactController@store");

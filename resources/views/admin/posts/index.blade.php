@@ -49,7 +49,7 @@
                       <line x1="3" y1="22" x2="21" y2="22"></line>
                     </svg>
                   </a>
-                  <form class="d-inline-block" action="{{ route('admin.posts.destroy', ['post' => $post->slug]) }}"
+                  {{-- <form class="d-inline-block" action="{{ route('admin.posts.destroy', ['post' => $post->slug]) }}"
                     method="post">
                     @csrf
                     @method('DELETE')
@@ -63,7 +63,12 @@
                         <line x1="14" y1="11" x2="14" y2="17"></line>
                       </svg>
                     </button>
-                  </form>
+                  </form> --}}
+
+                  <crud-delete-btn action="{{ route('admin.posts.destroy', ['post' => $post->slug]) }}">
+                    @csrf
+                    @method('DELETE')
+                  </crud-delete-btn>
                 </td>
               </tr>
             @endforeach

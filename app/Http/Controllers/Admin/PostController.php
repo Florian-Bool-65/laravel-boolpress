@@ -70,7 +70,7 @@ class PostController extends Controller
         $user = Auth::user();
 
         if ($user->role === "admin") {
-            $posts = Post::orderBy("created_at", "desc")->onlyTrashed()->paginate(5);
+            $posts = Post::orderBy("created_at", "desc")->paginate(5);
         } else {
             // $posts = Post::where("user_id", $user->id)->orderBy("created_at", "desc")->get();
             $posts = $user->posts;
@@ -236,12 +236,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($slug)
+    public function destroy(Request $request, $slug)
     {
+        $forceDelete = $request->query->has("force-delete");
+
         $post = $this->findBySlug($slug);
 
         // Se l'elemento è già cancellato in "soft delete", lo vado ad eliminare definitivamente
-        if ($post->trashed()) {
+        if ($post->trashed() || $forceDelete) {
             // Annulliamo tutte le eventuali relazioni attive, 
             // che altrimenti ci impedirebbero di cancellare il post
             $post->tags()->detach();
