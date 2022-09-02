@@ -2,6 +2,21 @@
   <div class="container">
 
     <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-2">
+        <h3>Filtri</h3>
+        <div>
+          Testo libero
+        </div>
+        <div>
+          Categorie:
+        </div>
+        <div>
+          Tags:
+        </div>
+
+
+      </div>
+
       <div class="col-md-10 col-lg-8 col-xl-7">
 
         <div v-for="post in posts" :key="post.id">
@@ -13,7 +28,7 @@
             </a>
             <p class="post-meta">
               Postato da
-              <router-link :to="{ name:'user.posts', params: { 'user_id': post.user.id } }">
+              <router-link :to="{ name: 'user.posts', params: { 'user_id': post.user.id } }">
                 {{ post.user.name }}
               </router-link>
               il <em>{{ new Intl.DateTimeFormat("it-IT", { dateStyle: "long", timeStyle: "short" }).format(new

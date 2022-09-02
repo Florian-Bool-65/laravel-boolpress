@@ -2442,7 +2442,7 @@ var render = function render() {
     staticClass: "container"
   }, [_c("div", {
     staticClass: "row gx-4 gx-lg-5 justify-content-center"
-  }, [_c("div", {
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "col-md-10 col-lg-8 col-xl-7"
   }, _vm._l(_vm.posts, function (post) {
     return _c("div", {
@@ -2484,7 +2484,14 @@ var render = function render() {
   }, [_vm._v("Carica post più datati")])]) : _vm._e()]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "col-md-2"
+  }, [_c("h3", [_vm._v("Filtri")]), _vm._v(" "), _c("div", [_vm._v("\n        Testo libero\n      ")]), _vm._v(" "), _c("div", [_vm._v("\n        Categorie:\n      ")]), _vm._v(" "), _c("div", [_vm._v("\n        Tags:\n      ")])]);
+}];
 render._withStripped = true;
 
 
