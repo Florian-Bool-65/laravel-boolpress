@@ -36,7 +36,7 @@
               <dt>Categoria</dt>
               <dd>
                 @if ($post->category)
-                  <a href="{{ route('admin.categories.posts', $post->category_id) }}">
+                  <a href="#">
                     {{ $post->category->name }}
                   </a>
                 @endif
