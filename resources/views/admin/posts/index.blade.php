@@ -75,7 +75,9 @@
           </tbody>
         </table>
 
-        {{ $posts->links() }}
+        @if ($posts)
+          {{ $posts->links() }}
+        @endif
       </div>
     </div>
   </div>
